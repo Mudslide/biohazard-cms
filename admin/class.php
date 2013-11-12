@@ -11,7 +11,7 @@ if(!session_exists()){
 include("../view/begin.php");
 include("../view/admin/sidebar.php");
 include("../view/middle.php");
-include_once("../inc/connect.php");
+include_once("../inc/database.php");
 ?>
   <form action="#" method="POST" enctype="multipart/form-data">
     <input type="text" name="class" placeholder="Přidat třídu" required><br/>

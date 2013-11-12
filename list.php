@@ -1,5 +1,5 @@
 <?php
-include("inc/connect.php");
+include("inc/database.php");
 include("view/begin.php");
 echo("<ul>");
 
