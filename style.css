@@ -1,0 +1,74 @@
+@font-face {
+ font-family: MediaGothic;
+ font-weight: normal;
+ src: local("Media Gothic"), url("./MediaGothic.ttf");
+}
+* {
+ font-family: "Trebuchet MS";
+ position: relative;
+}      
+body {
+ width: 940px;
+ margin: auto;
+ margin-top: -45px;
+}
+body>h1 {
+ font-family: MediaGothic;
+ font-size: 8.25rem;
+ text-transform: uppercase;
+ margin-bottom: -135px;
+ margin-left: 3px;
+ margin-right: 14px;
+ color: #236000;
+ z-index: 2;
+}
+.box {
+ display: block;
+ background: #236000;
+ min-height: 500px;
+ color: #fff;
+}
+[data-role=side] {
+ float: left;
+ width: 285px;
+ margin-top: 110px;
+ min-height: 390px;
+ z-index: 3;
+}
+[data-role=content] {
+ position: relative;
+ margin-left: 300px;
+ padding: 10px;
+}
+[data-role=content] h1 {
+ font-family: MediaGothic;
+ font-size: 8.25rem;
+ color: #fff;
+ margin-top: -20px;
+ margin-bottom: 0px;
+}
+#ad {
+ position: absolute;
+ left: 0px;
+ bottom: 0px;
+ padding: 10px;
+ text-align: center;
+}
+#ad * {
+ font-size: 0.9rem;
+}
+li > a {
+ text-decoration: none;
+ color: #fff;
+}
+#easteregg {
+ position: fixed;
+ right: 0;
+ bottom: 0;
+ height: 50px;
+ width: 50px;
+ cursor: pointer;
+}
+.nope {
+ display: none;
+}
