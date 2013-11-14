@@ -1,17 +1,18 @@
 <?php
+set_include_path(dirname(__FILE__) . '/../');
 
-include_once("../inc/error.php");
-include_once("../inc/session.php");
+include_once("inc/error.php");
+include_once("inc/session.php");
 
 if(!session_exists()){
  header("Location: http://bio.g6.cz/admin/login.php");
  exit();
 }
 
-include("../view/begin.php");
-include("../view/admin/sidebar.php");
-include("../view/middle.php");
-include_once("../inc/database.php");
+include("view/begin.php");
+include("view/admin/sidebar.php");
+include("view/middle.php");
+include_once("inc/database.php");
 ?>
   <form action="#" method="POST" enctype="multipart/form-data">
     <input type="text" name="class" placeholder="Přidat třídu" required><br/>
@@ -75,4 +76,4 @@ if(isset($_POST['class']) && !empty($_POST['class'])){ //TODO Proč ne if($_POST
  }  
 }
 
-include("../view/end.php");
+include("view/end.php");

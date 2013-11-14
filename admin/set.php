@@ -1,20 +1,21 @@
 <?php
+set_include_path(dirname(__FILE__) . '/../');
 
-include_once("../inc/error.php");
-include_once("../inc/session.php");
+include_once("inc/error.php");
+include_once("inc/session.php");
 
 if(!session_exists()){
  header("Location: http://bio.g6.cz/admin/login.php");
  exit();
 }
 
-include("../view/begin.php");
-include("../view/admin/sidebar.php");
-include("../view/middle.php");
-include_once("../inc/database.php");
+include("view/begin.php");
+include("view/admin/sidebar.php");
+include("view/middle.php");
+include_once("inc/database.php");
 
 if(isset($_GET['del']) && !empty($_GET['del'])){
- include_once "../inc/connect.php";
+ include_once "inc/connect.php";
  $id = $_GET['del'];
  $query_01 = "SELECT soubor FROM soubory WHERE id=".$id;
  
@@ -35,7 +36,7 @@ if(isset($_GET['del']) && !empty($_GET['del'])){
 }
 
 if(isset($_GET['vis']) && !empty($_GET['vis'])){
- include "connect/inc.php";
+ include "inc/database.php";
  $values = explode('E',$_GET['vis']);
  $query = "UPDATE soubory SET viditelnost = '".$values[0]."' WHERE id='".$values[1]."'";
  if($result = $connect->query($query)){
@@ -68,7 +69,7 @@ if(isset($_GET['vis']) && !empty($_GET['vis'])){
 <?php
 
   if(isset($_POST['list']) && !empty($_POST['list'])){
-    include "connect/inc.php";
+    include "inc/database.php";
       $query = "SELECT * FROM soubory ORDER by ID DESC";
       $class = $_POST['list'];
        
@@ -106,4 +107,4 @@ if(isset($_GET['vis']) && !empty($_GET['vis'])){
  }
 
 
-include("../view/end.php");?>
+include("view/end.php");?>

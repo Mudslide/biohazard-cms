@@ -1,17 +1,18 @@
 <?php
+set_include_path(dirname(__FILE__) . '/../');
 
-include_once("../inc/error.php");
-include_once("../inc/session.php");
+include_once("inc/error.php");
+include_once("inc/session.php");
 
 if(!session_exists()){
  header("Location: http://bio.g6.cz/admin/login.php");
  exit();
 }
 
-include("../view/begin.php");
-include("../view/admin/sidebar.php");
-include("../view/middle.php");
-include_once("../inc/database.php");
+include("view/begin.php");
+include("view/admin/sidebar.php");
+include("view/middle.php");
+include_once("inc/database.php");
 
 
 if(isset($_POST['nadpis']) && !empty($_POST['nadpis']) && isset($_POST['trida'])){
@@ -87,5 +88,5 @@ if($result = $connect->query($query_01)){
     <input type="submit" value="Uložit">
    </form>
 <?php
- include("../view/end.php");
+ include("view/end.php");
 ?>

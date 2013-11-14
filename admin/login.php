@@ -1,7 +1,8 @@
 <?php
+set_include_path(dirname(__FILE__) . '/../');
 
-include_once("../inc/error.php");
-include_once("../inc/session.php");
+include_once("inc/error.php");
+include_once("inc/session.php");
 
 if(session_exists()){
  header("Location: http://bio.g6.cz/admin");
@@ -25,13 +26,13 @@ if(session_exists()){
  }
 }
 
-include("../view/begin.php");
+include("view/begin.php");
 
 echo("<ul>");
 echo(" <li><a href=http://bio.g6.cz>Zpět na hlavní stránku</a></li>");
 echo("</ul>");
 
-include("../view/middle.php");
+include("view/middle.php");
 ?>
    <h2>Přihlášení do administrace</h2>
     
@@ -45,4 +46,4 @@ include("../view/middle.php");
      <input name=pass type=password />
      <button type=submit>Přihlásit!</button>
     </form>
-<?php include("../view/end.php");?>
+<?php include("view/end.php");?>

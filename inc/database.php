@@ -1,6 +1,6 @@
 <?php
-include_once("./inc/error.php");
-$ini = parse_ini_file("./inc/connect.ini",1);
+include_once("inc/error.php");
+$ini = parse_ini_file("inc/connect.ini",1);
 if(!$ini){
  error("Podprogramu se nepodařilo načíst soubor s nastavením. Zkontrolujte <i>inc/connect.ini</i>");
 }
