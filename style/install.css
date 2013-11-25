@@ -1,0 +1,44 @@
+html {
+ background: url(../background.png) no-repeat center center fixed; 
+ background-size: 1000px 1000px;
+}
+
+#container{
+  position:absolute;
+  left:39%;
+  top:17%;
+}
+
+.form{
+  height: 40px;
+  width: 400px;
+  margin:4px;
+  font-family: Verdana;
+  font-size: 20px; 
+  opacity:0.8;  
+}
+
+.button{
+  height: 40px;
+  width: 403px;
+  margin:4px;
+  font-family: Verdana;
+  font-size: 20px; 
+  opacity:0.8;
+  border:none; 
+
+}
+
+.top_form{
+  height: 40px;
+  width: 194px;
+  margin:4px;
+  font-family: Verdana;
+  font-size: 20px; 
+  opacity:0.8;  
+} 
+
+#ad{
+ display:none;
+ }
+ 

@@ -16,26 +16,42 @@ include_once("inc/database.php");
 
 
 if(isset($_POST['nadpis']) && !empty($_POST['nadpis']) && isset($_POST['trida'])){
- $file = $_FILES['file']; //$_FILES je isset a !empty pořád
- $time = time(); //čas příspěvku
+  $file = $_FILES['file']; //$_FILES je isset a !empty pořád
+  $time = time(); //čas příspěvku
  
- //deklarace vstupů a escapovaní "SQL infection"
- $class  = $connect->real_escape_string($_POST['trida' ]);
- $nadpis = $connect->real_escape_string($_POST['nadpis']);
- $popis  = $connect->real_escape_string($_POST['popis' ]);
+  //deklarace vstupů a escapovaní "SQL infection"
+  $class  = $connect->real_escape_string($_POST['trida']);
+  $nadpis = $connect->real_escape_string($_POST['nadpis']);
+  $popis  = $connect->real_escape_string($_POST['popis']);
  
- if($_POST['viditelnost']){ 
-  $viditelnost = 1;
- }else{
-  $viditelnost = 0;
- }
+  $offset = 0;
+  $find = "v=";
+   
+  $position = strpos($popis, $find, $offset);
+ 
+  if($position > 11){
+  $a = $position + "2";
+  $b = "11";
+  $youtube_kod = mb_substr($text_textarea, $a, $b);
+  }
+  if(empty($youtube_kod)){
+  $youtube_kod2 = "";
+  }else{
+  $youtube_kod2 = '<iframe width="420" height="315" src="http://www.youtube.com/embed/'.$youtube_kod.'" frameborder="0" allowfullscreen></iframe>'; 
+  }
+  $popis = $popis.'<br>'.$youtube_kod2;
+ 
+  if($_POST['viditelnost']){ 
+    $viditelnost = 1;
+  }else{
+    $viditelnost = 0;
+  }
  
   if(!empty($file['name'])){ //VYSVĚTLENÍ problém je v tom že if($_FILES['file'];) je pořád TRUE když je prázdný i když ne, no takže to vezme jméno nahráteho souboru které není prázdný nikdy  
     if($file["error"] !== UPLOAD_ERR_OK){
-    //Chyba nahrávání mezi klientem a serverem
-    $error[0] = "Soubor nebyl v pořádku nahrán (Error 01)\n"; 
+      //Chyba nahrávání mezi klientem a serverem
+      $error[0] = "Soubor nebyl v pořádku nahrán (Error 01)\n"; 
     }
-  
     $dir = "../files/";
     $info = pathinfo($file["name"]); //informace o souboru (připona etc.)
     $name = $time.'.'.$info['extension'];

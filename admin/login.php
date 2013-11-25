@@ -5,15 +5,16 @@ include_once("inc/error.php");
 include_once("inc/session.php");
 
 if(session_exists()){
- header("Location: http://bio.g6.cz/admin");
- exit();
+  header("Location: http://bio.g6.cz/admin");
+  exit();
  
-}elseif($_GET['user']){
+ } elseif($_GET['user']) {
  
- //Check user&password
- //TODO Use a database!
- 
- if($_GET['user']=="zajicek"&&$_GET['pass']=='123'){
+  $ini = parse_ini_file("../inc/connect_test.ini",1);
+  if(!$ini){
+    error("Podprogramu se nepodařilo načíst soubor s nastavením. Zkontrolujte <i>inc/connect.ini</i>");
+  }
+ if($_GET['user'] == $ini['user']['name'] && $_GET['pass'] == $ini['user']['password']){
   //Successful login
   session_create();
   header("Location: http://bio.g6.cz/admin");
