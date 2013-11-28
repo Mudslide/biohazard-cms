@@ -20,7 +20,7 @@
  </head>
  <body>
 <?php
-$ini = parse_ini_file("inc/connect.ini",1); //TODO rename to connect.inc
+$ini = parse_ini_file("inc/connect_test.ini",1); //TODO rename to connect.inc
   if($ini){
   header("Location: http://bio.g6.cz");
   }
@@ -38,22 +38,20 @@ $ini = parse_ini_file("inc/connect.ini",1); //TODO rename to connect.inc
     $my_file = 'inc/connect_test.ini'; //TODO rename to connect.inc
       if($handle = fopen($my_file, 'w+')){
           $data = '[connect]'."\n".
-                  'host="localhost"; hostname'."\n".
-                  'user="'.$user.'"; username'."\n".
-                  'pass="'.$pass.'"; password'."\n".
-                  'dbnm="'.$user.'"; database name'."\n".
+                  'host="localhost";       hostname'."\n".
+                  'user="'.$user.'";       username'."\n".
+                  'pass="'.$pass.'";       password'."\n".
+                  'dbnm="'.$user.'";       database name'."\n".
                   "\n".
                   '[user]'."\n".
-                  'name="'    .$name.'"; name'."\n".
-                  'password="'.$password.'"; password'."\n".
-                  'email="'   .$email.'"; email'."\n"
+                  'name="'    .$name.'";   name'."\n".
+                  'password="'.$password.'";   password'."\n".
+                  'email="'   .$email.'";  email'."\n"
                   ;
                   
           
           fwrite($handle, $data);
           fclose($handle);
-          
-          unlink("install.php");
        }
    
   $connect = new mysqli('localhost',$user,$pass,$user);
