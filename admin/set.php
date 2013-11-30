@@ -5,7 +5,7 @@ include_once("inc/error.php");
 include_once("inc/session.php");
 
 if(!session_exists()){
- header("Location: http://bio.g6.cz/admin/login.php");
+ header("Location: http://".$_SERVER['HTTP_HOST']."/admin/login.php");
  exit();
 }
 
@@ -30,7 +30,7 @@ if(isset($_GET['del']) && !empty($_GET['del'])){
   $query_02 = "DELETE FROM soubory WHERE id=".$id;
   
   if($result = $connect->query($query_02)){
-   echo('<script type="text/javascript">alert("Příspěvek smazán"); document.location = "set.php";</script>');
+   echo('<script type="text/javascript">alert("Příspěvek smazán"); document.location = "set.php?list='.urlencode($_GET['list']).'";</script>');
   }
  }
 }
@@ -40,14 +40,14 @@ if(isset($_GET['vis']) && !empty($_GET['vis'])){
  $values = explode('E',$_GET['vis']);
  $query = "UPDATE soubory SET viditelnost = '".$values[0]."' WHERE id='".$values[1]."'";
  if($result = $connect->query($query)){
-  echo '<script type="text/javascript">alert("Příspěvek byl upraven"); document.location = "set.php";</script>';
+  echo '<script type="text/javascript">document.location = "set.php?list='.urlencode($_GET['list']).'";</script>';
  }
 }
 
 
 ?>
      
-     <form action="#" method="POST">
+   <form action method="get">
     <select name="list">
       <?php
       include "connect/inc.php"; //includuje connect.php prostě připojí mysql
@@ -61,47 +61,52 @@ if(isset($_GET['vis']) && !empty($_GET['vis'])){
       ?>
       
     </select>
-    <input type="submit" value="Zobrazit">
+    <button type="submit">Zobrazit</button>
   </form>
     
     
     
 <?php
 
-  if(isset($_POST['list']) && !empty($_POST['list'])){
+  if(isset($_GET['list']) && !empty($_GET['list'])){
     include "inc/database.php";
       $query = "SELECT * FROM soubory ORDER by ID DESC";
-      $class = $_POST['list'];
+      $class = $_GET['list'];
        
     if ($result = $connect->query($query)) {
-      $count = $result->num_rows;
-      if($count == 0){
-         echo 'Tato třída nemá zatím žádný příspěvek';
-      }else{
-      echo 'Nalezeno '.$count.'<br /><br />';
+     $count = $result->num_rows;
+     if($count == 0){
+      //TODO Teď sčítá příspěvky všech tříd dohromady!
+      //echo 'Tato třída nemá zatím žádný příspěvek';
+     }else{
+      //echo 'Nalezeno '.$count.' příspěvků<br /><br />';
+     }
+     
+     while ($row = $result->fetch_assoc()) {
+      if($row['class'] == $class){
+       $id = $row['id'];
+       $popis = htmlspecialchars($row['popis']);
+       if(strlen($popis)>42){
+        $popis = substr($popis,0,42)."...";
+       }
+       
+       if(!empty($row['soubor'])){
+        $file_name = $row['soubor'];
+        $file_name = '<a href="http://'.$_SERVER['HTTP_HOST'].'/files/'.$file_name.'"><img src="http://'.$_SERVER['HTTP_HOST'].'/img/clip.png" /></a>'; 
+       }else{
+        $file_name = '<img src="http://'.$_SERVER['HTTP_HOST'].'/img/empty.png" />';
+       }
+       
+       if($row['viditelnost'] == 1 ){
+        $viditelnost = '<a href="set.php?vis=0E'.$id.'&list='.urlencode($_GET['list']).'"><img src="http://'.$_SERVER['HTTP_HOST'].'/img/vis.png" /></a>';    
+       }else{
+        $viditelnost = '<a href="set.php?vis=1E'.$id.'&list='.urlencode($_GET['list']).'"><img src="http://'.$_SERVER['HTTP_HOST'].'/img/hid.png" /></a>';
+       }
+       
+       echo('<span class=row>'.$file_name.' <a href="set.php?del='.$id.'&list='.urlencode($_GET['list']).'"><img src="http://'.$_SERVER['HTTP_HOST'].'/img/del.png" /></a> '.$viditelnost.' <strong>'.$row['nadpis'].'</strong> &bull; '.$popis.' &bull; ID: '.$row['id'].'</span>');
       }
-      
-      while ($row = $result->fetch_assoc()) {
-        if($row['class'] == $class){
-            $id = $row['id']; 
-            
-            
-            if(!empty($row['soubor'])){
-            $file_name = $row['soubor'];
-            $file_name = '<a href="../files/'.$file_name.'">Soubor</a>'; 
-            }
-            
-            if($row['viditelnost'] == 1 ){
-              $viditelnost = '<a href="set.php?vis=0E'.$id.'">Skrýt</a>';    
-            }else{
-              $viditelnost = '<a href="set.php?vis=1E'.$id.'">Zobrazit</a>';
-            }
-            
-            echo '<a href="set.php?del='.$id.'">Smazat</a>   '.$viditelnost.'   '.$row['id'].'   '.$row['nadpis'].'   '.$row['popis'].'   '.$file_name;
-            echo "<br />";
-        }
-      }
-      //$result->free();
+     }
+     //$result->free();
     }
     $connect->close();
  }

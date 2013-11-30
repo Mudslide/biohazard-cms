@@ -17,5 +17,5 @@ if($result = $connect->query($query)){
 echo("</ul>");
 
 include("view/middle.php");
-echo("You're not logged in.");
+echo("Vítejte!");
 include("view/end.php");

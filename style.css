@@ -39,6 +39,7 @@ body>h1 {
  position: relative;
  margin-left: 300px;
  padding: 10px;
+ padding-bottom: 30px;
 }
 [data-role=content] h1 {
  font-family: MediaGothic;
@@ -46,6 +47,9 @@ body>h1 {
  color: #fff;
  margin-top: -20px;
  margin-bottom: 0px;
+}
+a {
+ color: white;
 }
 #ad {
  position: absolute;
@@ -56,6 +60,7 @@ body>h1 {
 }
 #ad * {
  font-size: 0.9rem;
+ color: white !important;
 }
 li > a {
  text-decoration: none;
@@ -91,8 +96,88 @@ input:focus{
 }
 
 .button{
-width:200px;
-height:30px;
-border:none;
-opacity:0.5;
+ width:200px;
+ height:30px;
+ border:none;
+ opacity:0.5;
+}
+
+form input:not([type=file]):not([type=checkbox]):not([type=radio]),
+form textarea,
+form button,
+form select,
+form .fail{
+ display: block;
+ height: 20px;
+ width: 210px;
+ margin:  2px;
+ margin-bottom: 5px;
+ padding: 2px;
+ font-family: Verdana;
+ text-align: center;
+ background: white;
+}
+
+form input:not([type=file]):not([type=checkbox]):not([type=radio]),
+form textarea,
+form button,
+form select {
+ background: white;
+ opacity: 0.95;
+ border: 1.5px solid gray;
+ border-radius: 5px;
+}
+
+form.add span {
+ display: block;
+ margin-bottom: 5px;
+}
+form.add span input {
+ display: inline-block;
+}
+
+form button,
+form select {
+ height: 27px;
+ width: 217px;
+}
+
+form button {
+ background: lightgray;
+}
+
+form textarea {
+ height: 100px;
+}
+
+form .fail,
+form .done {
+ display: inline-block;
+ font-weight: bold;
+ margin: 4px;
+ color: #f42;
+}
+
+form .done {
+ color: #8d7; 
+}
+
+
+span.row,
+span.date {
+ display: block;
+ margin-bottom: 5px;
+}
+
+span.row img {
+ position: relative;
+ top: 5px;
+}
+
+span.date {
+ margin-top: 10px;
+}
+
+a.nadpis {
+ font-weight: bold;
 }
