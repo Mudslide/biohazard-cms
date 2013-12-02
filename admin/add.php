@@ -98,15 +98,23 @@ if($result = $connect->query($query_01)){
  }
 }
 if(!$existuje_trida){
+<<<<<<< HEAD
  echo('<span>Nejprve prosím vytvořte třídu!</span>');
+=======
+ echo('<span class=fail>Nejprve prosím vytvořte třídu!</span>');
+>>>>>>> bd9b80e34c71cc26fbfb107449f5c90d3a2e4a53
 }
 ?>
     <textarea name="popis" placeholder="Popis"></textarea>
     <span>Zobrazit příspěvek: <input type="checkbox" name="viditelnost" value="ano" checked></span>
     <span>Příloha: <input type="file" name="file"></span>
+<<<<<<< HEAD
     <?php if($existuje_trida){ ?>
      <button type="submit">Uložit</button>
     <?php } ?>
+=======
+    <button type="submit">Uložit</button>
+>>>>>>> bd9b80e34c71cc26fbfb107449f5c90d3a2e4a53
    </form>
 <?php
  include("view/end.php");
