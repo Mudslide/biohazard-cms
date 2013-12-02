@@ -5,7 +5,7 @@ include_once("inc/error.php");
 include_once("inc/session.php");
 
 if(!session_exists()){
- header("Location: http://bio.g6.cz/admin/login.php");
+ header("Location: http://".$_SERVER['HTTP_HOST']."/admin/login.php");
  exit();
 }
 
@@ -15,14 +15,14 @@ include("view/middle.php");
 include_once("inc/database.php");
 
 
-if(isset($_POST['nadpis']) && !empty($_POST['nadpis']) && isset($_POST['trida'])){
+if($_POST['nadpis'] && $_POST['trida']){
   $file = $_FILES['file']; //$_FILES je isset a !empty pořád
   $time = time(); //čas příspěvku
  
   //deklarace vstupů a escapovaní "SQL infection"
   $class  = $connect->real_escape_string($_POST['trida']);
-  $nadpis = $connect->real_escape_string($_POST['nadpis']);
-  $popis  = $connect->real_escape_string($_POST['popis']);
+  $nadpis = $connect->real_escape_string(trim($_POST['nadpis']));
+  $popis  = $connect->real_escape_string(trim($_POST['popis']));
  
   $offset = 0;
   $find = "v=";
@@ -64,7 +64,7 @@ if(isset($_POST['nadpis']) && !empty($_POST['nadpis']) && isset($_POST['trida'])
     }
   }
  
-  $query = "INSERT INTO soubory (date, class, nadpis ,popis ,soubor, real_name , viditelnost ) VALUES ( '".$time."', '".$class."', '".$nadpis."', '".$popis."' , '".$name."' , '".$real_name."' , '".$viditelnost."')";
+  $query = "INSERT INTO soubory (date, class, nadpis, popis, soubor, real_name, viditelnost ) VALUES ( '".$time."', '".$class."', '".$nadpis."', '".$popis."', '".$name."', '".$real_name."', '".$viditelnost."')";
  
   if (!$connect->query($query)){
     //Chyba při odesílání query
@@ -75,33 +75,38 @@ if(isset($_POST['nadpis']) && !empty($_POST['nadpis']) && isset($_POST['trida'])
   if(!empty($error)){
     echo('<script type="text/javascript">alert("'.$error[0] . $error[1] . $error[3].'"); document.location = "add.php";</script>'); 
   }else{
-    echo('<script type="text/javascript">alert("Příspěvek byl uložen (ID přispěvku: '.$connect->insert_id.')"); document.location = "add.php";</script>'); 
+    echo('<script type="text/javascript">document.location = "add.php?success=1&prispevek='.$connect->insert_id.'";</script>'); 
  }
 }
 
 
 ?>
-  <form action="#" method="POST" enctype="multipart/form-data">
-    <input type="text" name="nadpis" placeholder="Nadpis" required>
-      <br />
+  <form class=add action method="post" enctype="multipart/form-data">
+<?php
+if($_GET['success']){
+ echo('<span class=done>Příspěvek byl úspěšně nahrán! Jeho id je '.$_GET['prispevek'].'.</span>');
+}
+?>
+    <input type="text" name="nadpis" placeholder="Nadpis" required/></span>
 <?php
 $query_01 = "SELECT * FROM class ORDER BY id";
+$existuje_trida = false;
 if($result = $connect->query($query_01)){
  while($row = $result->fetch_assoc()){
-  echo('<input type="radio" name="trida" value="'.$row['class'].'" required>'.$row['class'].'<br>'); 
+  echo('<label><input type="radio" name="trida" value="'.$row['class'].'" required />'.$row['class'].'</label>'); 
+  $existuje_trida = true;
  }
 }
+if(!$existuje_trida){
+ echo('<span>Nejprve prosím vytvořte třídu!</span>');
+}
 ?>
-      <br />
     <textarea name="popis" placeholder="Popis"></textarea>
-      <br />
-      <br />
-    Zobrazit příspěvek: <input type="checkbox" name="viditelnost" value="ano" checked>
-      <br />
-      <br />
-    <input type="file" name="file">
-      <br />
-    <input type="submit" value="Uložit">
+    <span>Zobrazit příspěvek: <input type="checkbox" name="viditelnost" value="ano" checked></span>
+    <span>Příloha: <input type="file" name="file"></span>
+    <?php if($existuje_trida){ ?>
+     <button type="submit">Uložit</button>
+    <?php } ?>
    </form>
 <?php
  include("view/end.php");

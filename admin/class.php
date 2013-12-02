@@ -5,7 +5,7 @@ include_once("inc/error.php");
 include_once("inc/session.php");
 
 if(!session_exists()){
- header("Location: http://bio.g6.cz/admin/login.php");
+ header("Location: http://".$_SERVER['HTTP_HOST']."/admin/login.php");
  exit();
 }
 
@@ -15,9 +15,9 @@ include("view/middle.php");
 include_once("inc/database.php");
 ?>
   <form action="#" method="POST" enctype="multipart/form-data">
-    <input type="text" name="class" placeholder="Přidat třídu" required><br/>
-    Zobrazit třídu: <input type="checkbox" name="viditelnost" value="ano" checked><br/>
-    <input type="submit" value="Přidat">
+    <input type="text" name="class" placeholder="Jméno třídy" required>
+    <span class=row><label>Zobrazit třídu: <input type="checkbox" name="viditelnost" value="ano" checked></label></span>
+    <button type="submit">Přidat</button>
   </form>
   <br/>
 <?php
@@ -54,11 +54,11 @@ if($result = $connect->query($query_01)){
   $class = $row['class'];
   $id = $row['id']; 
   if($row['viditelnost'] == 1 ){
-   $viditelnost = '<a href="class.php?vis=0E'.$id.'">Skrýt</a>';    
+   $viditelnost = '<a href="class.php?vis=0E'.$id.'"><img src="http://'.$_SERVER['HTTP_HOST'].'/img/vis.png" /></a>';    
   }else{
-   $viditelnost = '<a href="class.php?vis=1E'.$id.'">Zobrazit</a>';
+   $viditelnost = '<a href="class.php?vis=1E'.$id.'"><img src="http://'.$_SERVER['HTTP_HOST'].'/img/hid.png" /></a>';
   }
-  echo('<a href="class.php?del='.$class.'">Smazat</a>  '.$viditelnost.'  '.$id .'  '.$row['class'].'<br />'); 
+  echo('<span class=row><a href="class.php?del='.$class.'"><img src="http://'.$_SERVER['HTTP_HOST'].'/img/del.png" /></a>  '.$viditelnost.' '.$row['class'].' &bull; ID:'.$id.'</span>'); 
  }
 }
 
