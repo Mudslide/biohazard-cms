@@ -17,7 +17,7 @@ if($result = $connect->query($query)){
 echo("</ul>");
 
 include("view/middle.php");
-   
+
 if(isset($_GET['class']) && !empty($_GET['class'])){
  $class  = $connect->real_escape_string($_GET['class']);
  $query = "SELECT * FROM soubory WHERE class='$class' ORDER BY id";
