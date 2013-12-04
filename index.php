@@ -29,6 +29,7 @@ if($result = $connect->query($query)){
    $popis = htmlspecialchars($row['popis'], ENT_QUOTES, "UTF-8");
    if(strlen($popis)>42){
     $popis = substr($popis,0,42)."...";
+    echo '<span class=row><a class=nadpis href="topic.php?id='.$row['id'].'">'.$row['nadpis'].'</a> &bull; '.$popis."</span>";
    }
   }
   if($i>15){
