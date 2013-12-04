@@ -21,15 +21,17 @@ include("view/middle.php");
 echo("<h3>Nejnovější příspěvky</h3>");
 
 $query = "SELECT * FROM soubory ORDER BY id desc";
+$i = 0;
 if($result = $connect->query($query)){
  while($row = $result->fetch_assoc()){
   if($row['viditelnost'] == 1){
+   $i++;
    $popis = htmlspecialchars($row['popis'], ENT_QUOTES, "UTF-8");
    if(strlen($popis)>42){
     $popis = substr($popis,0,42)."...";
    }
   }
-  if($row['id']>15){
+  if($i>15){
    break;
   }
  }
