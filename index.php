@@ -20,6 +20,7 @@ include("view/middle.php");
 
 echo("<h3>Nejnovější příspěvky</h3>");
 
+echo("<div class=table>");
 $query = "SELECT * FROM soubory ORDER BY id desc";
 $i = 0;
 if($result = $connect->query($query)){
@@ -27,9 +28,13 @@ if($result = $connect->query($query)){
   if($row['viditelnost'] == 1){
    $i++;
    $popis = htmlspecialchars($row['popis'], ENT_QUOTES, "UTF-8");
+   $nadpis= htmlspecialchars($row['nadpis'],ENT_QUOTES, "UTF-8");
    if(strlen($popis)>42){
     $popis = substr($popis,0,42)."...";
-    echo '<span class=row><a class=nadpis href="topic.php?id='.$row['id'].'">'.$row['nadpis'].'</a> &bull; '.$popis."</span>";
+    echo '<span class=row><a class=nadpis href="topic.php?id='.$row['id'].'">'.$nadpis.'</a> <span class=popis>'.$popis."</span></span>";
+   }
+   if(strlen($nadpis)>28){
+    $nadpis = substr($nadpis,0,18)."...";
    }
   }
   if($i>15){
@@ -37,4 +42,5 @@ if($result = $connect->query($query)){
   }
  }
 }
+echo("</div>");
 include("view/end.php");

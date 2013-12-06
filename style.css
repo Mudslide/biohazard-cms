@@ -128,7 +128,6 @@ form select {
  border-radius: 5px;
 }
 
-<<<<<<< HEAD
 #opts input {
  display: inline;
  border: none;
@@ -139,8 +138,6 @@ form select {
  display: block;
 }
 
-=======
->>>>>>> bd9b80e34c71cc26fbfb107449f5c90d3a2e4a53
 form.add span {
  display: block;
  margin-bottom: 5px;
@@ -178,13 +175,26 @@ form .done {
 
 span.row,
 span.date {
- display: block;
  margin-bottom: 5px;
 }
 
 span.row img {
  position: relative;
  top: 5px;
+}
+
+.table {
+ display: table;
+}
+
+.table .row {
+ display: table-row;
+}
+
+.table .nadpis,
+.table .popis {
+ display: table-cell;
+ padding: 2px;
 }
 
 span.date {
