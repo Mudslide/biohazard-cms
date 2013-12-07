@@ -175,6 +175,7 @@ form .done {
 
 span.row,
 span.date {
+ display: block;
  margin-bottom: 5px;
 }
 

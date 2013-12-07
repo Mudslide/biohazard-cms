@@ -25,10 +25,17 @@ if(isset($_GET['class']) && !empty($_GET['class'])){
  if($result = $connect->query($query)){
   while($row = $result->fetch_assoc()){
    if($row['viditelnost'] == 1){
-    $popis = htmlspecialchars($row['popis'], ENT_QUOTES, "UTF-8");
+    $popis  = $row['popis'];
+    $nadpis = $row['nadpis'];
+    
+    $popis  = preg_replace("/<br\\/?>$/i","",$popis);
+    $popis  = htmlspecialchars($popis, ENT_QUOTES, "UTF-8");
+    $nadpis = htmlspecialchars($row['nadpis'],ENT_QUOTES, "UTF-8");
+    
     if(strlen($popis)>42){
      $popis = substr($popis,0,42)."...";
     }
+    
     if(!empty($row['soubor'])){
      $real_name = $row['real_name'];
      $file_name = $row['soubor'];

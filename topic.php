@@ -25,7 +25,7 @@ if($_GET['id']){
     if($row_topic['soubor']){
       echo '<span class=row><a href="http://'.$_SERVER['HTTP_HOST'].'/files/'.$row_topic['soubor'].'"><img src="http://'.$_SERVER['HTTP_HOST'].'/img/clip.png" /> '.$row_topic['real_name'].'</a></span>'; 
     }
-    echo "<span class=date>".date("m. d. Y, H:i", $row_topic['date'])."</span>";
+    echo "<span class=date>".date("d. m. Y, H:i", $row_topic['date'])."</span>";
   }
 }
 

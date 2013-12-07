@@ -27,15 +27,21 @@ if($result = $connect->query($query)){
  while($row = $result->fetch_assoc()){
   if($row['viditelnost'] == 1){
    $i++;
-   $popis = htmlspecialchars($row['popis'], ENT_QUOTES, "UTF-8");
-   $nadpis= htmlspecialchars($row['nadpis'],ENT_QUOTES, "UTF-8");
+   
+   $popis  = $row['popis'];
+   $nadpis = $row['nadpis'];
+   
+   $popis  = preg_replace("/<br\\/?>$/i","",$popis);
+   $popis  = htmlspecialchars($popis, ENT_QUOTES, "UTF-8");
+   $nadpis = htmlspecialchars($row['nadpis'],ENT_QUOTES, "UTF-8");
+   
    if(strlen($popis)>42){
     $popis = substr($popis,0,42)."...";
-    echo '<span class=row><a class=nadpis href="topic.php?id='.$row['id'].'">'.$nadpis.'</a> <span class=popis>'.$popis."</span></span>";
    }
    if(strlen($nadpis)>28){
     $nadpis = substr($nadpis,0,18)."...";
    }
+   echo '<span class=row><a class=nadpis href="topic.php?id='.$row['id'].'">'.$nadpis.'</a> <span class=popis>'.$popis."</span></span>";
   }
   if($i>15){
    break;
