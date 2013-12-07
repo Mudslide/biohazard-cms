@@ -54,7 +54,11 @@ if(isset($_GET['vis']) && !empty($_GET['vis'])){
         $query_01 = "SELECT * FROM class ORDER BY id";
         if ($result = $connect->query($query_01)) {
           while ($row = $result->fetch_assoc()) {
-            echo '<option value="'.$row['class'].'">'.$row['class'].'</option> ';
+            echo '<option value="'.$row['class'].'"';
+            if($row['class']==$_GET['list']){
+             echo " selected";
+            }
+            echo '>'.$row['class'].'</option> ';
           }
         }
       
