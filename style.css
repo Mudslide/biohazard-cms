@@ -21,6 +21,14 @@ body>h1 {
  margin-right: 14px;
  color: #236000;
  z-index: 2;
+ 
+ cursor: default;
+ -webkit-touch-callout: none;
+ -webkit-user-select: none;
+ -khtml-user-select: none;
+ -moz-user-select: none;
+ -ms-user-select: none;
+ user-select: none;
 }
 .box {
  display: block;
@@ -39,7 +47,7 @@ body>h1 {
  position: relative;
  margin-left: 300px;
  padding: 10px;
- padding-bottom: 30px;
+ padding-bottom: 50px;
 }
 [data-role=content] h1 {
  font-family: MediaGothic;
@@ -172,6 +180,15 @@ form .done {
  color: #8d7; 
 }
 
+div.clanek,
+h3.nadpis {
+ display: block;
+ white-space: pre-line;
+ hyphens: auto;
+ -webkit-hyphens: auto;
+ -moz-hyphens: auto;
+ -ms-hyphens: auto;
+}
 
 span.row,
 span.date {
@@ -196,6 +213,16 @@ span.row img {
 .table .popis {
  display: table-cell;
  padding: 2px;
+ white-space: nowrap;
+ overflow: hidden;
+ text-overflow: ellipsis;
+}
+
+.table .nadpis {
+ max-width: 180px;
+}
+.table .popis {
+ max-width: 360px;
 }
 
 span.date {

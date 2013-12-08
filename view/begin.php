@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html lang=en-US> <!-- jazyk definovan kvuli hyphens slovnikum -->
  <head>
   <meta charset=utf-8 />
   <title>BioHazard</title>

@@ -2,7 +2,7 @@
 include("inc/database.php");
 include("view/begin.php");
 echo("<ul>");
-
+echo("<li><a href=index.php>Přehled</a></li>");
 
 $query = "SELECT * FROM class ORDER BY id";
 if($result = $connect->query($query)){
@@ -35,12 +35,6 @@ if($result = $connect->query($query)){
    $popis  = htmlspecialchars($popis, ENT_QUOTES, "UTF-8");
    $nadpis = htmlspecialchars($row['nadpis'],ENT_QUOTES, "UTF-8");
    
-   if(strlen($popis)>42){
-    $popis = substr($popis,0,42)."...";
-   }
-   if(strlen($nadpis)>28){
-    $nadpis = substr($nadpis,0,18)."...";
-   }
    echo '<span class=row><a class=nadpis href="topic.php?id='.$row['id'].'">'.$nadpis.'</a> <span class=popis>'.$popis."</span></span>";
   }
   if($i>15){

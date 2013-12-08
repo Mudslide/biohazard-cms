@@ -2,6 +2,7 @@
 include("inc/database.php");
 include("view/begin.php");
 echo("<ul>");
+echo("<li><a href=index.php>Přehled</a></li>");
 
 $query = "SELECT * FROM class ORDER BY id";
 if($result = $connect->query($query)){
