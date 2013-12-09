@@ -89,7 +89,11 @@ if(isset($_GET['vis']) && !empty($_GET['vis'])){
      while ($row = $result->fetch_assoc()) {
       if($row['class'] == $class){
        $id = $row['id'];
+       $nadpis= htmlspecialchars($row['popis']);
        $popis = htmlspecialchars($row['popis']);
+       if(strlen($nadpis)>32){
+        $nadpis = substr($nadpis,0,24)."...";
+       }
        if(strlen($popis)>42){
         $popis = substr($popis,0,42)."...";
        }
@@ -107,7 +111,7 @@ if(isset($_GET['vis']) && !empty($_GET['vis'])){
         $viditelnost = '<a href="set.php?vis=1E'.$id.'&list='.urlencode($_GET['list']).'"><img src="http://'.$_SERVER['HTTP_HOST'].'/img/hid.png" /></a>';
        }
        
-       echo('<span class=row>'.$file_name.' <a href="set.php?del='.$id.'&list='.urlencode($_GET['list']).'"><img src="http://'.$_SERVER['HTTP_HOST'].'/img/del.png" /></a> '.$viditelnost.' <strong>'.$row['nadpis'].'</strong> &bull; '.$popis.' &bull; ID: '.$row['id'].'</span>');
+       echo('<span class=row>'.$file_name.' <a href="set.php?del='.$id.'&list='.urlencode($_GET['list']).'"><img src="http://'.$_SERVER['HTTP_HOST'].'/img/del.png" /></a> '.$viditelnost.' <a href="topic.php?id='.$row['id'].'"><strong>'.$nadpis.'</strong></a> &bull; '.$popis.' &bull; ID: '.$row['id'].'</span>');
       }
      }
      //$result->free();
