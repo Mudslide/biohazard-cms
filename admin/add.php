@@ -108,6 +108,41 @@ if(!$existuje_trida){
      <button type="submit">Uložit</button>
     <?php } ?>
    </form>
+   
+   <!-- Prevent from submitting form by pressing enter -->
+   <script>
+    function nextField(n){
+     var i = Array.prototype.indexOf.call(n.form.elements,n);
+     while(
+      ++i < n.form.elements.length
+     ){
+      if(n.form.elements[i].tabIndex+1){
+       n.form.elements[i].focus();
+       if(n.form.elements[i].type == "text"){
+        n.form.elements[i].select();
+       }
+       break;
+      }
+     }
+    }
+    
+    function kpress(e){
+     if(
+      e.keyCode==13&
+      e.target.tagName.toLowerCase()!="textarea"&
+      e.target.tagName.toLowerCase()!="button"
+     ){
+      if(e.target.form){
+       nextField(e.target);
+      }
+      e.preventDefault();
+      e.returnValue=false;
+      e.cancel = true;
+     }
+    }
+    
+    document.addEventListener("keypress",kpress);
+   </script>
 <?php
  include("view/end.php");
 ?>

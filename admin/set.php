@@ -89,8 +89,12 @@ if(isset($_GET['vis']) && !empty($_GET['vis'])){
      while ($row = $result->fetch_assoc()) {
       if($row['class'] == $class){
        $id = $row['id'];
-       $nadpis= htmlspecialchars($row['popis']);
-       $popis = htmlspecialchars($row['popis']);
+       $nadpis= $row['popis'];
+       $popis = $row['popis'];
+       $popis = preg_replace("/<br\\/?>$/i","",$popis);
+       $nadpis = preg_replace("/<br\\/?>$/i","",$nadpis);
+       $popis = htmlspecialchars($popis);
+       $nadpis= htmlspecialchars($nadpis);
        if(strlen($nadpis)>32){
         $nadpis = substr($nadpis,0,24)."...";
        }
