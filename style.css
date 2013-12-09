@@ -6,21 +6,23 @@
 * {
  font-family: "Trebuchet MS";
  position: relative;
-}      
+}
+::selection {
+ background: white;
+ color: #236000;
+}
+::-moz-selection {
+ background: white;
+ color: #236000;
+}
 body {
  width: 940px;
  margin: auto;
  margin-top: -45px;
 }
-body>h1 {
+.supernadpis {
  font-family: MediaGothic;
  font-size: 8.25rem;
- text-transform: uppercase;
- margin-bottom: -135px;
- margin-left: 3px;
- margin-right: 14px;
- color: #236000;
- z-index: 2;
  
  cursor: default;
  -webkit-touch-callout: none;
@@ -29,6 +31,21 @@ body>h1 {
  -moz-user-select: none;
  -ms-user-select: none;
  user-select: none;
+}
+.supernadpis::selection {
+ background: rgba(0, 0, 0, 0);
+}
+.supernadpis::-moz-selection {
+ background: rgba(0, 0, 0, 0);
+}
+
+body>.supernadpis {
+ text-transform: uppercase;
+ margin-bottom: -135px;
+ margin-left: 3px;
+ margin-right: 14px;
+ color: #236000;
+ z-index: 2;
 }
 .box {
  display: block;
@@ -49,9 +66,7 @@ body>h1 {
  padding: 10px;
  padding-bottom: 50px;
 }
-[data-role=content] h1 {
- font-family: MediaGothic;
- font-size: 8.25rem;
+[data-role=content]>.supernadpis {
  color: #fff;
  margin-top: -20px;
  margin-bottom: 0px;

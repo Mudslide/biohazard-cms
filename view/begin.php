@@ -6,5 +6,5 @@
   <link rel=stylesheet href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/style.css" />
  </head>
  <body>
-  <h1>Bio<span class=nope>Hazard</span></h1>
+  <h1 class=supernadpis>Bio<span class=nope>Hazard</span></h1>
   <div class=box data-role=side>
