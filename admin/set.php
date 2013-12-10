@@ -89,7 +89,7 @@ if(isset($_GET['vis']) && !empty($_GET['vis'])){
      while ($row = $result->fetch_assoc()) {
       if($row['class'] == $class){
        $id = $row['id'];
-       $nadpis= $row['popis'];
+       $nadpis= $row['nadpis'];
        $popis = $row['popis'];
        $popis = preg_replace("/<br\\/?>$/i","",$popis);
        $nadpis = preg_replace("/<br\\/?>$/i","",$nadpis);
