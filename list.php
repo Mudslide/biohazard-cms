@@ -4,24 +4,26 @@ include("view/begin.php");
 echo("<ul>");
 echo("<li><a href=index.php>Přehled</a></li>");
 
+$class_exists = false;
 $query = "SELECT * FROM class ORDER BY id";
 if($result = $connect->query($query)){
  while($row = $result->fetch_assoc()){
   $class = $row['class'];
   if($row['viditelnost'] == 1){
+   if($row['class']==$_GET['class']){
+    $class_exists = true;
+   }
    echo('<li><a href="list.php?class='.$class.'">'.$class.'</a></li>');
   }
  }
 }
-
 echo("</ul>");
 
 include("view/middle.php");
 
-echo("<h3>Třída: ".$_GET['class']."</h3>");
-
-echo("<div class=table>");
-if(isset($_GET['class']) && !empty($_GET['class'])){
+if($_GET['class']&&$class_exists){
+ echo("<h3>Třída: ".$_GET['class']."</h3>");
+ echo("<div class=table>");
  $class  = $connect->real_escape_string($_GET['class']);
  $query = "SELECT * FROM soubory WHERE class='$class' ORDER BY id desc";
  
@@ -48,7 +50,11 @@ if(isset($_GET['class']) && !empty($_GET['class'])){
    }
   }
  }
+ echo("</div>");
+}else{
+ $_JOLANDA['nadpis'] = "To není normální!";
+ $_JOLANDA['zprava'] = "Třída <strong>".htmlspecialchars($_GET['class'])."</strong> (už/ještě) neexistuje - možná byla smazána, nebo je skrytá - ale jediné, co s tím můžete dělat je kontaktovat správce.";
+ include("view/jolanda.php");
 }
-echo("</div>");
 
 include("view/end.php");
