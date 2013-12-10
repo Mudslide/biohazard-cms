@@ -60,6 +60,16 @@ body>.supernadpis {
  min-height: 390px;
  z-index: 3;
 }
+[data-role=side] ul {
+ list-style-position: inside;
+ white-space: nowrap;
+}
+[data-role=side] li {
+ max-width: 200px;
+ overflow: hidden;
+ text-overflow: ellipsis;
+}
+
 [data-role=content] {
  position: relative;
  margin-left: 300px;
