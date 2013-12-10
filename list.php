@@ -52,7 +52,7 @@ if($_GET['class']&&$class_exists){
  }
  echo("</div>");
 }else{
- $_JOLANDA['nadpis'] = "To není normální!";
+ $_JOLANDA['nadpis'] = "404 - Not found!";
  $_JOLANDA['zprava'] = "Třída <strong>".htmlspecialchars($_GET['class'])."</strong> (už/ještě) neexistuje - možná byla smazána, nebo je skrytá - ale jediné, co s tím můžete dělat je kontaktovat správce.";
  include("view/jolanda.php");
 }
