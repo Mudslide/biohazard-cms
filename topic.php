@@ -35,7 +35,7 @@ if($_GET['id']){
    echo "<h3 class=nadpis>".$row_topic['nadpis']."</h3>";
    echo "<div class=clanek>".$row_topic['popis']."</div>";
    if($row_topic['soubor']){
-    echo '<span class=row><a href="http://'.$_SERVER['HTTP_HOST'].'/files/'.$row_topic['soubor'].'"><img src="http://'.$_SERVER['HTTP_HOST'].'/img/clip.png" /> '.$row_topic['real_name'].'</a></span>'; 
+    echo '<span class=row><a href="http://'.$_SERVER['HTTP_HOST'].'/files/'.$row_topic['soubor'].'" download><img src="http://'.$_SERVER['HTTP_HOST'].'/img/clip.png" /> '.$row_topic['real_name'].'</a></span>'; 
    }
    echo "<span class=date>".date("d. m. Y, H:i", $row_topic['date'])."</span>";
   }else{

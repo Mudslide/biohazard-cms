@@ -42,7 +42,7 @@ if($_GET['class']&&$class_exists){
     if(!empty($row['soubor'])){
      $real_name = $row['real_name'];
      $file_name = $row['soubor'];
-     $file_name = '<a href="../files/'.$file_name.'"><img src="http://'.$_SERVER['HTTP_HOST'].'/img/clip.png" /></a>'; 
+     $file_name = '<a href="../files/'.$file_name.'" download><img src="http://'.$_SERVER['HTTP_HOST'].'/img/clip.png" /></a>'; 
     }else{
      $file_name = '<img src="http://'.$_SERVER['HTTP_HOST'].'/img/empty.png" />';
     }
