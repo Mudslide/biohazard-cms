@@ -7,4 +7,11 @@
  </head>
  <body>
   <h1 class=supernadpis>Bio<span class=nope>Hazard</span></h1>
+  <div class=vzkaz>
+   <form action method=post>
+   <textarea name=vzkaz placeholder="Popis"></textarea>
+   <input type=email name=email placeholder="e-mail"/>
+   <button type=submit>Odeslat</button>
+  </div>
   <div class=box data-role=side>
+  
